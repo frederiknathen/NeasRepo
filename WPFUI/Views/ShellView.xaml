@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI.Views"
         mc:Ignorable="d"
-        Title="ShellView" Height="300" Width="300" WindowStartupLocation="CenterScreen">
+        Title="ShellView" Height="300" Width="300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -30,16 +30,16 @@
         <!-- Row 1 -->
         <TextBlock Text="{Binding Path=FullName, Mode=OneWay}"  Grid.Row="1" Grid.Column="1"
                    Grid.ColumnSpan="2"></TextBlock>
-        
+
         <!-- Row 2 -->
         <TextBox MinWidth="100" Grid.Row="2" Grid.Column="1" x:Name="FirstName"></TextBox>
         <TextBox MinWidth="100" Grid.Row="2" Grid.Column="2" x:Name="LastName"></TextBox>
-        
+
         <!-- Row 3 -->
-        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="Distrikt"
-                  SelectedItem="{Binding Path=SelectedDistrikt, Mode=OneWayToSource}"
-                  DisplayMemberPath="Distrikt_navn"></ComboBox>
-        <TextBlock Grid.Row="3" Grid.Column="2" x:Name="SelectedPerson_Rolle"></TextBlock>
+        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="People"
+                  SelectedItem="{Binding Path=SelectedPerson, Mode=OneWayToSource}"
+                  DisplayMemberPath="FirstName"></ComboBox>
+        <TextBlock Grid.Row="3" Grid.Column="2" x:Name="SelectedPerson_LastName"></TextBlock>
 
         <!-- Row 4 -->
         <Button x:Name="ClearText"  Grid.Row="4" Grid.Column="1">Clear Text</Button>
@@ -47,10 +47,9 @@
         <!-- Row 5 -->
         <Button x:Name="LoadPageOne" Grid.Row="5" Grid.Column="1" >Load first page</Button>
         <Button x:Name="LoadPageTwo" Grid.Row="5" Grid.Column="2" >Load second page</Button>
-        
+
         <!-- Row 6 -->
         <ContentControl Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="5" 
                         x:Name="ActiveItem"></ContentControl>
-        <!--<ListView Grid="6" Grid.Column="1" /> -->
     </Grid>
 </Window>

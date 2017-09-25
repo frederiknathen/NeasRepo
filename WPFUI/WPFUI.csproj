@@ -95,8 +95,8 @@
     <Compile Include="Views\SecondChildView.xaml.cs">
       <DependentUpon>SecondChildView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewChild.xaml.cs">
-      <DependentUpon>ViewChild.xaml</DependentUpon>
+    <Compile Include="Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +138,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ViewChild.xaml">
+    <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
