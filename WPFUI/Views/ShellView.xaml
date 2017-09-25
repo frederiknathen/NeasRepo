@@ -36,10 +36,10 @@
         <TextBox MinWidth="100" Grid.Row="2" Grid.Column="2" x:Name="LastName"></TextBox>
         
         <!-- Row 3 -->
-        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="People"
-                  SelectedItem="{Binding Path=SelectedPerson, Mode=OneWayToSource}"
-                  DisplayMemberPath="FirstName"></ComboBox>
-        <TextBlock Grid.Row="3" Grid.Column="2" x:Name="SelectedPerson_LastName"></TextBlock>
+        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="Distrikt"
+                  SelectedItem="{Binding Path=SelectedDistrikt, Mode=OneWayToSource}"
+                  DisplayMemberPath="Distrikt_navn"></ComboBox>
+        <TextBlock Grid.Row="3" Grid.Column="2" x:Name="SelectedPerson_Rolle"></TextBlock>
 
         <!-- Row 4 -->
         <Button x:Name="ClearText"  Grid.Row="4" Grid.Column="1">Clear Text</Button>
@@ -51,5 +51,6 @@
         <!-- Row 6 -->
         <ContentControl Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="5" 
                         x:Name="ActiveItem"></ContentControl>
+        <!--<ListView Grid="6" Grid.Column="1" /> -->
     </Grid>
 </Window>

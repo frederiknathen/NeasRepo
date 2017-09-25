@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPFUI.Models;
+using WPFUI.DataAccessLayer;
 
 namespace WPFUI.ViewModels
 {
@@ -14,13 +15,15 @@ namespace WPFUI.ViewModels
         private string _lastName;
         private BindableCollection<PersonModel> _people = new BindableCollection<PersonModel>();
         private PersonModel _selectedPerson;
-
+        private List<SælgerModel> _sælgere;
+        private DistrikterModel _selectedDistrikt;
+        private List<DistrikterModel> _distrikter;
+        
         public ShellViewModel()
         {
-                People.Add(new PersonModel {FirstName = "Frederik", LastName = "Sørensen"});
-                People.Add(new PersonModel {FirstName = "Cecilie", LastName = "Peter"});
-                People.Add(new PersonModel {FirstName = "Carsten", LastName = "Eriksen"});
-                People.Add(new PersonModel {FirstName = "Mathilde", LastName = "Johansen"});
+            DataAccess db = new DataAccess();
+            Distrikt = db.DistriktData();
+
         }
         public string FirstName
         {
@@ -52,11 +55,17 @@ namespace WPFUI.ViewModels
         {
             get { return $"{ FirstName } { LastName}"; }
         }
-        
+
         public BindableCollection<PersonModel> People
         {
             get { return _people; }
             set { _people = value; }
+        }
+
+        public List<SælgerModel> Sælgere
+        {
+            get { return _sælgere; }
+            set { _sælgere = value; }
         }
 
         public PersonModel SelectedPerson
@@ -66,6 +75,22 @@ namespace WPFUI.ViewModels
             {
                 _selectedPerson = value;
                 NotifyOfPropertyChange(() => SelectedPerson);
+            }
+        }
+
+        public List<DistrikterModel> Distrikt
+        {
+            get { return _distrikter; }
+            set { _distrikter = value; }
+        }
+
+        public DistrikterModel SelectedDistrikt
+        {
+            get { return _selectedDistrikt; }
+            set
+            {
+                _selectedDistrikt = value;
+                NotifyOfPropertyChange(() => SelectedDistrikt);
             }
         }
 
