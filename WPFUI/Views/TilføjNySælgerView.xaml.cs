@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WPFUI.Views
 {
     /// <summary>
-    /// Interaction logic for SecondChildView.xaml
+    /// Interaction logic for TilføjNySælgerView.xaml
     /// </summary>
-    public partial class SecondChildView : UserControl
+    public partial class TilføjNySælgerView : UserControl
     {
-        public SecondChildView()
+        public TilføjNySælgerView()
         {
             InitializeComponent();
         }

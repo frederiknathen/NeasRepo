@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Caliburn.Micro;
 
-namespace WPFUI.ViewModels
+namespace WPFUI.Models
 {
-    public class SecondChildViewModel : Screen
+    public class NySælgerModel : SælgerModel
     {
+        public int Distrikt_ID { get; set; }
     }
 }

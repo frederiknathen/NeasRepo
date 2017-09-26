@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WPFUI.Models
 {
-    public class PersonModel
+    class SkiftAnsvarModel
     {
-        public string FirstName { get; set; }
-        public String LastName { get; set; }
+        public int Distrikter_DID { get; set; }
+        public int Sælgere_SID { get; set; }
     }
 }

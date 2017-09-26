@@ -11,8 +11,10 @@ namespace WPFUI.Models
         public int SID { get; set; }
         public string Fornavn { get; set; }
         public string Efternavn { get; set; }
-        public string Rolle { get; set; }
-        public int DID { get; set; }
-        public string Distrikt_navn { get; set; }
+
+        public string FuldeNavn
+        {
+            get { return $"{Fornavn} {Efternavn}"; }
+        }
     }
 }

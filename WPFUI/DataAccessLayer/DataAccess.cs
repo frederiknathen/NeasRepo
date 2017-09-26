@@ -13,33 +13,39 @@ namespace WPFUI.DataAccessLayer
 {
     public class DataAccess
     {
-        public List<PersonModel> GetSælgere(string Efternavn)
+
+       public void InsertSælger(string fornavn, string efternavn, int distrikt_id)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
             {
-                //return connection.Query<Sælger>($"SELECT * FROM Sælgere WHERE Efternavn = '{ Efternavn }'").ToList();
-                return connection.Query<PersonModel>("dbo.VisSælgere @Efternavn", new { Efternavn = Efternavn }).ToList();
+                List<NySælgerModel> sælgere = new List<NySælgerModel>();
+
+                sælgere.Add(new NySælgerModel { Fornavn = fornavn, Efternavn = efternavn, Distrikt_ID = distrikt_id});
+
+                connection.Execute("dbo.InsertSælger @Fornavn, @Efternavn, @Distrikt_ID", sælgere);
+            }
+        }
+        public void GørPersonAnsvarlig(int glAnsvarligSælgerID, int distriktID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
+            {
+                List<SkiftAnsvarModel> AnsvarligSælger = new List<SkiftAnsvarModel>();
+
+                AnsvarligSælger.Add(new SkiftAnsvarModel { Distrikter_DID = distriktID, Sælgere_SID = glAnsvarligSælgerID });
+
+                connection.Execute("dbo.GørPersonAnsvarlig @Sælgere_SID, @Distrikter_DID", AnsvarligSælger);
             }
         }
 
-/*        public void InsertSælger(string fornavn, string efternavn)
+        public void GørPersonSekundær(int glAnsvarligSælgerID, int distriktID)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
             {
-                //Sælger nySælger = new Sælger {Fornavn = fornavn, Efternavn = efternavn};
-                List<PersonModel> sælgere = new List<PersonModel>();
+                List<SkiftAnsvarModel> AnsvarligSælger = new List<SkiftAnsvarModel>();
 
-                sælgere.Add(new PersonModel { Fornavn = fornavn, Efternavn = efternavn });
+                AnsvarligSælger.Add(new SkiftAnsvarModel { Distrikter_DID = distriktID, Sælgere_SID = glAnsvarligSælgerID });
 
-                connection.Execute("dbo.Insert_Ny_Sælger @Fornavn, @EFternavn", sælgere);
-            }
-        }*/
-
-        public List<SælgerModel> SælgerData(string Distriktnavn)
-        {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
-            {
-                return connection.Query<SælgerModel>("dbo.HentPersonerIDistrikt @Distriktnavn", new { Distriktnavn = Distriktnavn }).ToList();
+                connection.Execute("dbo.GørPersonSekundær @Sælgere_SID, @Distrikter_DID", AnsvarligSælger);
             }
         }
 
@@ -47,13 +53,12 @@ namespace WPFUI.DataAccessLayer
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
             {
-                List<DistrikterModel> test = new List<DistrikterModel>(); 
-                test = connection.Query<DistrikterModel>("dbo.HentDistrikter").ToList();
-                return test;
+                List<DistrikterModel> test = new List<DistrikterModel>();
+                return connection.Query<DistrikterModel>("dbo.HentDistrikter").ToList();
             }
         }
 
-        public List<Butik> HentButikkerTilhørendeDistriktID(int DistriktID)
+        public List<Butik> FindButikkerIDistriktViaDID(int DistriktID)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
             {
@@ -61,13 +66,19 @@ namespace WPFUI.DataAccessLayer
             }
         }
 
-        public void SetSælgerTilAnsvarlig()
+        public List<SælgerModel> GetAnsvarligSælgerForDistrikt(int DistriktID)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
             {
-
+                return connection.Query<SælgerModel>("dbo.GetAnsvarligSælgerForDistrikt @Distrikt_DID", new { Distrikt_DID = DistriktID }).ToList();
             }
         }
-
+        public List<SælgerModel> GetSælgereForDistrikt(int DistriktID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
+            {
+                return connection.Query<SælgerModel>("dbo.GetSælgereForDistrikt @Distrikt_DID", new { Distrikt_DID = DistriktID }).ToList();
+            }
+        }
     }
 }

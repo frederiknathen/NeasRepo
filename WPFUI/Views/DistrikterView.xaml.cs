@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WPFUI.Views
 {
     /// <summary>
-    /// Interaction logic for FirstChildView.xaml
+    /// Interaction logic for DistrikterView.xaml
     /// </summary>
-    public partial class FirstChildView : UserControl
+    public partial class DistrikterView : UserControl
     {
-        public FirstChildView()
+        public DistrikterView()
         {
             InitializeComponent();
         }
