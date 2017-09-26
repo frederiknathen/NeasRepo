@@ -28,13 +28,6 @@ namespace WPFUI.ViewModels
             Overskrift = "Distrikter";
             ActivateItem(new DistrikterViewModel());
         }
-
-        public void LoadSælgere()
-        {
-            Overskrift = "Sælgere";
-            ActivateItem(new SælgereViewModel());
-        }
-
         public void LoadTilføj()
         {
             Overskrift = "Tilføj/rediger sælger";

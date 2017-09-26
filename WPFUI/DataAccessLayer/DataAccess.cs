@@ -13,14 +13,13 @@ namespace WPFUI.DataAccessLayer
 {
     public class DataAccess
     {
-
-       public void InsertSælger(string fornavn, string efternavn, int distrikt_id)
+        public void InsertSælger(string fornavn, string efternavn, int distrikt_id)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
             {
                 List<NySælgerModel> sælgere = new List<NySælgerModel>();
 
-                sælgere.Add(new NySælgerModel { Fornavn = fornavn, Efternavn = efternavn, Distrikt_ID = distrikt_id});
+                sælgere.Add(new NySælgerModel { Fornavn = fornavn, Efternavn = efternavn, Distrikt_ID = distrikt_id });
 
                 connection.Execute("dbo.InsertSælger @Fornavn, @Efternavn, @Distrikt_ID", sælgere);
             }
@@ -36,7 +35,6 @@ namespace WPFUI.DataAccessLayer
                 connection.Execute("dbo.GørPersonAnsvarlig @Sælgere_SID, @Distrikter_DID", AnsvarligSælger);
             }
         }
-
         public void GørPersonSekundær(int glAnsvarligSælgerID, int distriktID)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
@@ -46,6 +44,29 @@ namespace WPFUI.DataAccessLayer
                 AnsvarligSælger.Add(new SkiftAnsvarModel { Distrikter_DID = distriktID, Sælgere_SID = glAnsvarligSælgerID });
 
                 connection.Execute("dbo.GørPersonSekundær @Sælgere_SID, @Distrikter_DID", AnsvarligSælger);
+            }
+        }
+
+        public void FjernSomSekundær(int glAnsvarligSælgerID, int distriktID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
+            {
+                List<SkiftAnsvarModel> AnsvarligSælger = new List<SkiftAnsvarModel>();
+
+                AnsvarligSælger.Add(new SkiftAnsvarModel { Distrikter_DID = distriktID, Sælgere_SID = glAnsvarligSælgerID });
+
+                connection.Execute("dbo.FjernSomSekundær @Sælgere_SID, @Distrikter_DID", AnsvarligSælger);
+            }
+        }
+        public void IndsætSomSekundærIAndetDistrikt(int glAnsvarligSælgerID, int distriktID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("NeasDB")))
+            {
+                List<SkiftAnsvarModel> AnsvarligSælger = new List<SkiftAnsvarModel>();
+
+                AnsvarligSælger.Add(new SkiftAnsvarModel { Distrikter_DID = distriktID, Sælgere_SID = glAnsvarligSælgerID });
+
+                connection.Execute("dbo.IndsætSomSekundærIAndetDistrikt @Sælgere_SID, @Distrikter_DID", AnsvarligSælger);
             }
         }
 

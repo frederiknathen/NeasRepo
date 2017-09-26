@@ -15,6 +15,7 @@ namespace WPFUI.ViewModels
         // Variables
         private List<DistrikterModel> _distrikter;
         private DistrikterModel _selectedDistrikt;
+        private DistrikterModel _selectedIndsætDistrikt;
         private List<Butik> _distriktsButikker;
         private List<SælgerModel> _ansvarligSælger;
         private List<SælgerModel> _sekundæreSælgere;
@@ -27,10 +28,10 @@ namespace WPFUI.ViewModels
         }
         public DistrikterModel SelectedIndsætDistrikt
         {
-            get { return _selectedDistrikt; }
+            get { return _selectedIndsætDistrikt; }
             set
             {
-                _selectedDistrikt = value;
+                _selectedIndsætDistrikt = value;
 
                 NotifyOfPropertyChange(() => SelectedIndsætDistrikt);
             }
@@ -113,6 +114,7 @@ namespace WPFUI.ViewModels
         {
             DataAccess db = new DataAccess();
             Distrikt = db.DistriktData();
+            IndsætDistrikt = db.DistriktData();
         }
 
         // Methods
@@ -182,6 +184,52 @@ namespace WPFUI.ViewModels
                 db.GørPersonAnsvarlig(SelectedSælger.SID, SelectedDistrikt.DID);
                 AnsvarligSælgerNavn = FullAnsvarligSælgerNavn();
                 SekundæreSælgere = GetSekundæreSælgere();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void FjernMarkeretSomSekundær()
+        {
+            try
+            {
+                if (SelectedSælger == null)
+                {
+                    throw new NullReferenceException("Vælg venligst en sælger");
+                }
+                if (AnsvarligSælger[0].SID == SelectedSælger.SID)
+                {
+                    throw new ArgumentException("Du kan ikke fjerne den valgte sælger da personen er ansvarlig");
+                }
+                DataAccess db = new DataAccess();
+                db.FjernSomSekundær(SelectedSælger.SID, SelectedDistrikt.DID);
+                SekundæreSælgere = GetSekundæreSælgere();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void SætSælgerSomSekunderIAndetDistrikt()
+        {
+            try
+            {
+                if (SelectedSælger == null)
+                {
+                    throw new NullReferenceException("Vælg venligst en sælger");
+                }
+
+                if(SelectedIndsætDistrikt.DID == SelectedDistrikt.DID)
+                {
+                    throw new ArgumentException("Du kan ikke tilføje samme sælger til det samme distrikt");
+                }
+                
+                DataAccess db = new DataAccess();
+
+                db.IndsætSomSekundærIAndetDistrikt(SelectedSælger.SID, SelectedIndsætDistrikt.DID);
             }
             catch (Exception ex)
             {

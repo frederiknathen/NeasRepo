@@ -31,15 +31,15 @@
         <!-- Row 1 -->
         <TextBlock Grid.Row="1" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"  >Tilføj ny sælger</TextBlock>
         <!-- Row 2 -->
-        <TextBlock MinWidth="100" Grid.Row="2" Grid.Column="1" Margin="10,0">Fornavn</TextBlock>
-        <TextBlock MinWidth="100" Grid.Row="2" Grid.Column="2" Margin="10,0">Efternavn</TextBlock>
+        <TextBlock MinWidth="100" Grid.Row="2" Grid.Column="1" Margin="10,0" HorizontalAlignment="Center">Fornavn</TextBlock>
+        <TextBlock MinWidth="100" Grid.Row="2" Grid.Column="2" Margin="10,0" HorizontalAlignment="Center">Efternavn</TextBlock>
 
         <!-- Row 3 -->
         <TextBox MinWidth="100" Grid.Row="3" Grid.Column="1" x:Name="Fornavn" Margin="10,0"></TextBox>
         <TextBox MinWidth="100" Grid.Row="3" Grid.Column="2" x:Name="Efternavn" Margin="10,0"></TextBox>
 
         <!-- Row 4 -->
-        <TextBlock Grid.Row="4" Grid.Column="1" Margin="0,10,10,10" MinWidth="100" >Vælg Distrikt:</TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="1" Margin="0,10,10,10" MinWidth="100" HorizontalAlignment="Center" >Vælg Distrikt:</TextBlock>
         <ComboBox Grid.Row="4" Grid.Column="2" x:Name="Distrikt" MinWidth="100"
                   SelectedItem="{Binding Path=SelectedDistrikt, Mode=OneWayToSource}"
                   DisplayMemberPath="Distrikt_navn" Height="22" VerticalAlignment="Top"

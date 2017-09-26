@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFUI.Views"
              mc:Ignorable="d" Background="White"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="550">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
@@ -26,6 +27,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
@@ -37,27 +39,32 @@
                   SelectedIndex="0" Margin="0,10"></ComboBox>
         <!-- Row 2-->
         <Separator Grid.Row="2" Grid.ColumnSpan="7" Margin="0,0,0,27"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0">Ansvarlig Sælger:</TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="2" Margin="5,0" >Sekundære Sælgere</TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="3">Butikker</TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0" HorizontalAlignment="Center">Ansvarlig Sælger:</TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="2" Margin="5,0" HorizontalAlignment="Center" >Sælgere</TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center">Tildel sælgere</TextBlock>
 
         <!-- Row 3 -->
         <TextBlock Grid.Row="3" Grid.Column="1" x:Name="AnsvarligSælgerNavn" TextDecorations="Underline" Foreground="Red"/>
         <ListView Grid.Row="3" Grid.Column="2" x:Name="SekundæreSælgere"
                   DisplayMemberPath="FuldeNavn" Margin="5,0" 
                   SelectedItem="{Binding Path=SelectedSælger, Mode=OneWayToSource}"/>
-        <ListView Grid.Row="3" Grid.Column="3" x:Name="DistriktsButikker"
-                 DisplayMemberPath="Butik_navn"/>
-        <!-- Row 5-->
-        <Button x:Name="GørMarkeretAnsvarlig" Grid.Row="5" Grid.Column="1">Gør sælger ansvarlig</Button>
+        <ComboBox Grid.Row="3" Grid.Column="3" x:Name="IndsætDistrikt" MinWidth="100"
+                  SelectedItem="{Binding Path=SelectedIndsætDistrikt, Mode=OneWayToSource}"
+                  DisplayMemberPath="Distrikt_navn" Height="22" VerticalAlignment="Top"
+                  SelectedIndex="0" Margin="0,10"></ComboBox>
+        <!-- Row 5-->       
+        <Button x:Name="GørMarkeretAnsvarlig" Grid.Row="5" Grid.Column="1" Margin="5,0" >Gør sælger ansvarlig</Button>
+        <Button x:Name="FjernMarkeretSomSekundær" Grid.Row="5" Grid.Column="2" Margin="5,0" >Fjern som sekundær</Button>
+        <Button x:Name="SætSælgerSomSekunderIAndetDistrikt" Grid.Row="5" Grid.Column="3" Margin="5,0">Tilføj som sekundær i andet distrikt</Button>
+
         <!-- Row 6-->
         <Separator Grid.Row="6" Grid.ColumnSpan="7" Margin="0,10,0,0"/>
         <!-- Row 7-->
-        <TextBlock Grid.Row="7" Grid.Column="1" Margin="5,0" TextWrapping="Wrap">Gør sælger sekundær i</TextBlock>
-        <ComboBox Grid.Row="7" Grid.Column="2" x:Name="IndsætDistrikt" MinWidth="100"
-                  SelectedItem="{Binding Path=SelectedIndsætDistrikt, Mode=OneWayToSource}"
-                  DisplayMemberPath="IndsætDistrikt_navn" Height="22" VerticalAlignment="Top"
-                  SelectedIndex="0" Margin="0,10"></ComboBox>
+        <TextBlock Grid.Row="7" Grid.Column="1" Margin="5,0" TextWrapping="Wrap" MaxWidth="100" HorizontalAlignment="Center" >Butikker</TextBlock>
+        <!-- Row 8-->
+        <ListView Grid.Row="8" Grid.Column="1" x:Name="DistriktsButikker"
+                 DisplayMemberPath="Butik_navn" Grid.ColumnSpan="1" Margin="5,10,82,1" Grid.RowSpan="2"/>
+
         
     </Grid>
 </UserControl>

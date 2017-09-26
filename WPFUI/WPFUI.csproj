@@ -82,7 +82,6 @@
     </Compile>
     <Compile Include="DataAccessLayer\DataAccess.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="Models\GørAnsvarligModel.cs" />
     <Compile Include="Models\NySælgerModel.cs" />
     <Compile Include="Models\SkiftAnsvarModel.cs" />
     <Compile Include="Models\SælgerModel.cs" />
@@ -90,7 +89,6 @@
     <Compile Include="Models\DistrikterModel.cs" />
     <Compile Include="ViewModels\DistrikterViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="ViewModels\SælgereViewModel.cs" />
     <Compile Include="ViewModels\TilføjNySælgerViewModel.cs" />
     <Compile Include="Views\DistrikterView.xaml.cs">
       <DependentUpon>DistrikterView.xaml</DependentUpon>
